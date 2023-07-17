@@ -2,7 +2,7 @@ import numpy as np
 import ase
 from pyemto.utilities import distort, rotation_matrix
 from pyemto.examples.emto_input_generator import *
-from pymatgen import Lattice
+from pymatgen.core import Lattice
 from ase.visualize import view
 from ase.build import cut, make_supercell
 import sys

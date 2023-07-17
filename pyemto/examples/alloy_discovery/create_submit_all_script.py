@@ -33,7 +33,7 @@ def create_submit_all_script():
     #for_loop_line = 'for i in '
     #for i in range(len(all_slurm_files)):
     #    for_loop_line += '{0} '.format(all_slurm_files[i])
-    submit_lines  = '#!/bin/bash'+'\n'
+    submit_lines  = '#!/bin/bash -l'+'\n'
     submit_lines += '\n'
     #submit_lines += for_loop_line + '\n'
     #submit_lines += 'do' + '\n'

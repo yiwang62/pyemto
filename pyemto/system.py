@@ -49,9 +49,15 @@ class System:
         else:
             self.folder = folder
         if EMTOdir is None:
-            self.EMTOdir = "/home/hpleva/EMTO5.8"
+            self.EMTOdir = os.getenv("EMTOdir", "/nfs/home/5/ywang/EMTO/5.8.1/build1/bin")
         else:
             self.EMTOdir = EMTOdir
+        """
+        print("EEEEEEEEEEEEEEEE", os.getenv("EMTOdir", "/nfs/home/5/ywang/EMTO/5.8.1/build1/bin"))
+        print("EEEEEEEEEEEEEEEE", EMTOdir, self.EMTOdir)
+        raise Exception("Sorry, no numbers below zero")
+        sys.exit()
+        """
 
         # Initialize default parameters
         self.ca_range_default = np.linspace(1.50, 1.70, 7)

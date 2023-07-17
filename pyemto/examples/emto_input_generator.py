@@ -5,7 +5,7 @@ from pyemto.utilities.utils import rotation_matrix
 import spglib as spg
 
 try:
-    from pymatgen import Lattice, Structure
+    from pymatgen.core import Lattice, Structure
     from pymatgen.vis.structure_vtk import StructureVis
     from pymatgen.symmetry.analyzer import SpacegroupAnalyzer
     from pymatgen.analysis.structure_matcher import StructureMatcher
@@ -34,7 +34,7 @@ class EMTO:
         else:
             self.folder = folder
         if EMTOdir is None:
-            self.EMTOdir = '/home/EMTO'
+            self.EMTOdir = os.getenv("EMTOdir", "/nfs/home/5/ywang/EMTO/5.8.1/build1/bin")
         else:
             self.EMTOdir = EMTOdir
 

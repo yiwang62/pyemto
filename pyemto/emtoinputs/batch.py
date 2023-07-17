@@ -74,7 +74,7 @@ class Batch:
         :rtype: str
         """
 
-        line = "#!/bin/bash" + "\n" + "\n"
+        line = "#!/bin/bash -l" + "\n" + "\n"
         line += "#SBATCH -J " + self.jobname + "\n"
         line += "#SBATCH -t " + self.runtime + "\n"
         line += "#SBATCH -o " + \
@@ -89,7 +89,7 @@ class Batch:
         self.use_module = False
         if self.slurm_options is not None:
             for tmp in self.slurm_options:
-                if 'module load emto' in tmp:
+                if tmp.startswith('module load'):
                     self.use_module = True
                     break
             for so in self.slurm_options:
@@ -99,7 +99,8 @@ class Batch:
         #elapsed_time = "/usr/bin/time "
         elapsed_time = ""
         if self.parallel is True:
-            kgrn_exe = 'kgrn_omp'
+            #kgrn_exe = 'kgrn_omp'
+            kgrn_exe = 'kgrn_cpa'
             kfcd_exe = 'kfcd_cpa'
         else:
             kgrn_exe = 'kgrn_cpa'
@@ -111,8 +112,12 @@ class Batch:
             KGRN_path = self.EMTOdir + "/kgrn/"
             KFCD_path = self.EMTOdir + "/kfcd/"
         else:
+            KGRN_path = self.EMTOdir+"/"
+            KFCD_path = self.EMTOdir+"/"
+            """
             KGRN_path = ""
             KFCD_path = ""
+            """
 
         if self.runKGRN:
             line += elapsed_time + common.cleanup_path(KGRN_path + kgrn_exe + " < ") +\

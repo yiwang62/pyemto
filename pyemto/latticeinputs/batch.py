@@ -77,7 +77,7 @@ class Batch:
 
         # Clean up path names
 
-        line = "#!/bin/bash" + "\n" + "\n"
+        line = "#!/bin/bash -l" + "\n" + "\n"
         line += "#SBATCH -J " + self.jobname_lat + "\n"
         line += "#SBATCH -t " + self.runtime + "\n"
         line += "#SBATCH -o " + \
@@ -92,7 +92,8 @@ class Batch:
         self.use_module = False
         if self.slurm_options is not None:
             for tmp in self.slurm_options:
-                if 'module load emto' in tmp:
+                #if 'module load emto' in tmp:
+                if tmp.startswith('module load'):
                     self.use_module = True
                     break
             for so in self.slurm_options:
@@ -114,9 +115,14 @@ class Batch:
             KSTR_path = self.EMTOdir + "/kstr/kstr"
             SHAPE_path = self.EMTOdir + "/shape/shape"
         else:
+            BMDL_path = self.EMTOdir + "/bmdl"
+            KSTR_path = self.EMTOdir + "/kstr"
+            SHAPE_path = self.EMTOdir + "/shape"
+            """
             BMDL_path = "bmdl"
             KSTR_path = "kstr"
             SHAPE_path = "shape"
+            """
         if self.runBMDL:
             line += elapsed_time + common.cleanup_path(BMDL_path + " < ") +\
                 common.cleanup_path(self.latpath + "/" + self.jobname_lat) + ".bmdl > " +\

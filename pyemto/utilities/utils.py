@@ -76,7 +76,7 @@ def write_batch(folder, jobname):
     """
 
     # Writes a SLURM batch script for the job
-    line = "#!/bin/bash" + "\n"
+    line = "#!/bin/bash -l" + "\n"
     line = line + "\n"
     line = line + "#SBATCH -J {0}".format(jobname) + "\n"
     line = line + "#SBATCH -t 01:00:00" + "\n"
